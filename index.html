@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cypress To-Do List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .todo-input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .todo-input-section input[type="text"] {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .todo-input-section input[type="text"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        .todo-input-section button {
+            background-color: #28a745; /* Green for Add */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+            flex-shrink: 0;
+        }
+        .todo-input-section button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .todo-item.completed {
+            background-color: #d4edda; /* Lighter green for completed */
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+        .todo-item span {
+            flex-grow: 1;
+            font-size: 1.1rem;
+        }
+        .todo-item .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .todo-item button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .todo-item .complete-btn {
+            background-color: #007bff; /* Blue for Complete */
+            color: white;
+        }
+        .todo-item .complete-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        .todo-item.completed .complete-btn {
+            background-color: #6c757d; /* Grey when completed */
+        }
+        .todo-item.completed .complete-btn:hover {
+            background-color: #5a6268;
+        }
+        .todo-item .delete-btn {
+            background-color: #dc3545; /* Red for Delete */
+            color: white;
+        }
+        .todo-item .delete-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+        }
+        .empty-message {
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 data-testid="app-title">My To-Do List</h1>
+
+        <div class="todo-input-section">
+            <input type="text" id="new-todo-input" data-testid="new-todo-input" placeholder="Add a new task...">
+            <button id="add-todo-button" data-testid="add-todo-button">Add Task</button>
+        </div>
+
+        <ul id="todo-list" class="todo-list" data-testid="todo-list">
+            <!-- To-do items will be added here by JavaScript -->
+        </ul>
+
+        <p id="empty-message" class="empty-message">No tasks yet. Add one above!</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const newTodoInput = document.getElementById('new-todo-input');
+            const addTodoButton = document.getElementById('add-todo-button');
+            const todoList = document.getElementById('todo-list');
+            const emptyMessage = document.getElementById('empty-message');
+
+            // Function to update the visibility of the empty message
+            function updateEmptyMessageVisibility() {
+                if (todoList.children.length === 0) {
+                    emptyMessage.style.display = 'block';
+                } else {
+                    emptyMessage.style.display = 'none';
+                }
+            }
+
+            // Function to create a new to-do list item
+            function createTodoItem(taskText) {
+                const listItem = document.createElement('li');
+                listItem.className = 'todo-item';
+                // Assign a unique ID for Cypress to easily target specific items
+                listItem.setAttribute('data-testid', `todo-item-${Date.now()}`);
+
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+                taskSpan.setAttribute('data-testid', 'todo-text');
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'actions';
+
+                const completeButton = document.createElement('button');
+                completeButton.className = 'complete-btn';
+                completeButton.textContent = 'Complete';
+                completeButton.setAttribute('data-testid', 'complete-button');
+                completeButton.addEventListener('click', () => {
+                    listItem.classList.toggle('completed');
+                    completeButton.textContent = listItem.classList.contains('completed') ? 'Undo' : 'Complete';
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-btn';
+                deleteButton.textContent = 'Delete';
+                deleteButton.setAttribute('data-testid', 'delete-button');
+                deleteButton.addEventListener('click', () => {
+                    listItem.remove();
+                    updateEmptyMessageVisibility(); // Update message after deletion
+                });
+
+                actionsDiv.appendChild(completeButton);
+                actionsDiv.appendChild(deleteButton);
+                listItem.appendChild(taskSpan);
+                listItem.appendChild(actionsDiv);
+
+                return listItem;
+            }
+
+            // Event listener for adding a new task
+            addTodoButton.addEventListener('click', () => {
+                const taskText = newTodoInput.value.trim();
+                if (taskText) {
+                    const newItem = createTodoItem(taskText);
+                    todoList.appendChild(newItem);
+                    newTodoInput.value = ''; // Clear input field
+                    updateEmptyMessageVisibility(); // Update message after adding
+                }
+            });
+
+            // Allow adding task by pressing Enter key
+            newTodoInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    addTodoButton.click();
+                }
+            });
+
+            // Initial check for empty message visibility
+            updateEmptyMessageVisibility();
+        });
+    </script>
+</body>
+</html>

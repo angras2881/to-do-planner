@@ -1,0 +1,25 @@
+
+
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "A simple To-Do List application with Cypress E2E tests.",
+  "main": "index.js",
+  "scripts": {
+    "start-server": "http-server . -p 8080",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "testing",
+    "todo-list"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.0.0",
+    "http-server": "^14.0.0"
+  }
+}
