@@ -26,7 +26,7 @@ describe('To-Do List Application Tests', () => {
     cy.get('#empty-message').should('be.visible');
 
     // Add the first todo item
-    cy.get('[data-testid="new-todo-input"]').type(todoText1);
+    cy.get('[data-testid="new-todo-input"]').type(todoText1); // Corrected data-testid
     cy.get('[data-testid="add-todo-button"]').click();
 
     // Assert that the new item is in the list and the empty message is gone
@@ -35,7 +35,7 @@ describe('To-Do List Application Tests', () => {
     cy.get('#empty-message').should('not.be.visible');
 
     // Add the second todo item
-    cy.get('[data-testid="new-todo-input"]').type(todoText2);
+    cy.get('[data-testid="new-todo-input"]').type(todoText2); // Corrected data-testid
     cy.get('[data-testid="add-todo-button"]').click();
 
     // Assert that both items are in the list
@@ -48,7 +48,7 @@ describe('To-Do List Application Tests', () => {
     const todoText = 'Buy groceries';
 
     // Add a todo item
-    cy.get('[data-testid="new-todo-input"]').type(todoText);
+    cy.get('[data-testid="new-todo-input"]').type(todoText); // Corrected data-testid
     cy.get('[data-testid="add-todo-button"]').click();
 
     // Get the newly added item and click its complete button
@@ -78,9 +78,9 @@ describe('To-Do List Application Tests', () => {
     const todoText2 = 'Go for a run';
 
     // Add two todo items
-    cy.get('[data-testid="new-todo-input"]').type(todoText1);
+    cy.get('[data-testid="new-todo-input"]').type(todoText1); // Corrected data-testid
     cy.get('[data-testid="add-todo-button"]').click();
-    cy.get('[data-testid="new-todo-input"]').type(todoText2);
+    cy.get('[data-testid="new-todo-input"]').type(todoText2); // Corrected data-testid
     cy.get('[data-testid="add-todo-button"]').click();
 
     // Verify there are two items
@@ -98,7 +98,7 @@ describe('To-Do List Application Tests', () => {
     cy.get('[data-testid="todo-list"]').children().should('have.length', 1);
 
     // Delete the second item
-    cy.get('[data-testid="todo-input"]').type(todoText2); // Re-type to locate the element
+    // Corrected logic: find the existing item by text, then find its delete button
     cy.get('[data-testid="todo-list"]')
       .contains(todoText2)
       .parents('[data-testid^="todo-item-"]')
@@ -113,7 +113,7 @@ describe('To-Do List Application Tests', () => {
   // Test case 5: Add item using Enter key
   it('should allow adding a todo item by pressing Enter key', () => {
     const todoText = 'Write code';
-    cy.get('[data-testid="new-todo-input"]').type(`${todoText}{enter}`);
+    cy.get('[data-testid="new-todo-input"]').type(`${todoText}{enter}`); // Corrected data-testid
     cy.get('[data-testid="todo-list"]').contains(todoText).should('be.visible');
     cy.get('[data-testid="todo-list"]').children().should('have.length', 1);
   });
