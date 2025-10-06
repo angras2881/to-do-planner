@@ -1,26 +1,26 @@
-To-Do Planner QA Project
-A web application tested with manual and automated (Cypress) QA processes to ensure functionality and reliability. This project demonstrates my skills in test automation, manual testing, and defect reporting.
+
+# To-Do Planner QA Project
+A web application tested with automated (Cypress) and manual QA processes to ensure reliable task management. This project showcases my 7+ years of QA experience, refreshed with modern tools after earning Associate and Bachelor’s degrees.
 
 ## About
-Built a simple to-do planner app (HTML, CSS, JavaScript) to practice QA. Created and executed automated tests using Cypress and manual test cases to validate features like task creation, deletion, and status updates.
+I built and tested this to-do planner (HTML, CSS, JavaScript) to demonstrate end-to-end QA skills, including test automation, manual testing, and defect reporting.
 
 ## QA Contributions
-- **Automated Testing**: Wrote 10+ Cypress tests to validate UI functionality (e.g., task creation, form validation).
-- **Manual Testing**: Developed 15 test cases covering functional, edge-case, and usability scenarios.
-- **Bug Reports**: Identified and documented 5 bugs with clear reproduction steps.
+- **Automated Testing**: 7+ Cypress tests for task creation, completion, deletion, and edge cases (see `/cypress/e2e`).
+- **Manual Testing**: 15 test cases and 5 bug reports for functional and usability testing (see `/Manual-Testing`).
+- **Skills**: Cypress, JavaScript, Manual Testing, Git.
 
-## Setup and Running Tests
-1. Clone the repo: `git clone https://github.com/angras2881/To-Do-Planner-QA`
-2. Install dependencies: `npm install`
-3. Run Cypress tests: `npx cypress run`
-4. View manual test cases in `/Manual-Testing/Test-Cases.md`
+## Setup
+1. Clone: `git clone https://github.com/angras2881/To-Do-Planner-QA`
+2. Install: `npm install`
+3. Run tests: `npx cypress run` or `npx cypress open`
+4. View results: `/cypress/screenshots` or `/cypress/videos`
 
 ## Files
-- `/cypress`: Automated test scripts
-- `/Manual-Testing`: Test plans, test cases, and bug reports
-- `/screenshots`: Visual evidence of test results and bugs
+- `/cypress/e2e/todo-list.cy.js`: Automated test scripts
+- `/Manual-Testing`: Test plan, test cases, bug reports (coming soon)
+- `/screenshots`: Test results and bug visuals
 
-## Skills Demonstrated
-- Automation: Cypress, JavaScript
-- Manual Testing: Test case design, bug reporting
-- Tools: Git, TestRail (test case management)
+## Contact
+- GitHub: https://github.com/
+- LinkedIn: www.linkedin.com/in/shipra-angra-449944233
