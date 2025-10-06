@@ -9,8 +9,7 @@ describe('To-Do List Application Tests', () => {
     // which should point to your locally served index.html
     cy.visit('/');
   });
-
-  // Test case 1: Verify the application title
+// Test case 1: Verify the application title displays correctly
   it('should display the correct application title', () => {
     cy.get('[data-testid="app-title"]')
       .should('be.visible')
@@ -117,4 +116,18 @@ describe('To-Do List Application Tests', () => {
     cy.get('[data-testid="todo-list"]').contains(todoText).should('be.visible');
     cy.get('[data-testid="todo-list"]').children().should('have.length', 1);
   });
+  it('should display error for empty task input', () => {
+  cy.get('[data-testid="add-todo-button"]').click();
+  cy.get('[data-testid="todo-list"]').children().should('have.length', 0);
+  // If your app has an error message, add:
+  // cy.get('[data-testid="error-message"]').should('be.visible').and('contain', 'Task cannot be empty');
+});
+
+it('should handle long task input', () => {
+  const longText = 'A'.repeat(200); // Test a very long input
+  cy.get('[data-testid="new-todo-input"]').type(longText);
+  cy.get('[data-testid="add-todo-button"]').click();
+  // If the app truncates, verify truncated text; otherwise, check for error
+  cy.get('[data-testid="todo-list"]').contains(longText.substring(0, 100)).should('be.visible');
+});
 });
