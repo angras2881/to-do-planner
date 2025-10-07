@@ -22,6 +22,6 @@ I developed and tested this to-do planner (HTML, CSS, JavaScript) to demonstrate
 - `/screenshots`: Visual evidence of test results and bugs
 
 ## Contact
-- GitHub: [Your Profile URL]
-- LinkedIn: [Your LinkedIn URL]
-- Email: [Your Email]
+- GitHub: 
+- LinkedIn: www.linkedin.com/in/shipra-angra-449944233
+- Email: angrashipra@gmail.com
