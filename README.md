@@ -1,5 +1,5 @@
 
-# To-Do Planner QA Project
+# to-do-planner-QA Project
 A web application tested with automated (Cypress) and manual QA processes to ensure reliable task management. This project showcases my 7+ years of QA experience, refreshed with modern tools after earning Associate and Bachelor’s degrees.
 
 ## About
@@ -11,7 +11,7 @@ I developed and tested this to-do planner (HTML, CSS, JavaScript) to demonstrate
 - **Skills**: Cypress, JavaScript, Manual Testing, Test Case Design, Defect Reporting, Git.
 
 ## Setup
-1. Clone: `git clone https://github.com/angras2881/To-Do-Planner-QA`
+1. Clone: `git clone https://github.com/angras2881/to-do-planner-QA
 2. Install: `npm install`
 3. Run tests: `npx cypress run` or `npx cypress open`
 4. View results: `/cypress/screenshots` or `/cypress/videos`
