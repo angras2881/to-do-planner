@@ -15,6 +15,6 @@
 | TC10| Check task persistence       | 1. Add task 2. Reload page                         | Task remains in list                   |
 | TC11| Verify UI title              | 1. Open app                                        | Title "My To-Do List" displayed        |
 | TC12| Test button accessibility    | 1. Tab to Add button 2. Press Enter                | Button clickable via keyboard          |
-| TC13| Cross-browser: Add task      | 1. In Firefox, add task                            | Task added successfully                |
-| TC14| Cross-browser: Delete task   | 1. In Firefox, delete task                         | Task removed successfully              |
+| TC13| Cross-browser: Add task      | 1. In Firefox, chrome, safari add task                            | Task added successfully                |
+| TC14| Cross-browser: Delete task   | 1. In Firefox,chrome, safari delete task                         | Task removed successfully              |
 | TC15| Usability: Input field focus | 1. Open app                                        | Input field auto-focused for typing    |
